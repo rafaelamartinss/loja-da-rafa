@@ -1948,9 +1948,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -71615,39 +71612,32 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-simple-table", {
-    scopedSlots: _vm._u([
-      {
-        key: "default",
-        fn: function() {
-          return [
-            _c("thead", [
-              _c("tr", [
-                _c("th", { staticClass: "text-left" }, [_vm._v("Name")]),
-                _vm._v(" "),
-                _c("th", { staticClass: "text-left" }, [_vm._v("Calories")])
-              ])
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-8" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("Exasssmplaaaeee Component")
             ]),
             _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.desserts, function(item) {
-                return _c("tr", { key: item.name }, [
-                  _c("td", [_vm._v(_vm._s(item.name))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(item.calories))])
-                ])
-              }),
-              0
-            )
-          ]
-        },
-        proxy: true
-      }
+            _c("div", { staticClass: "card-body" }, [
+              _vm._v(
+                "\n                    I'm an example component.\n                "
+              )
+            ])
+          ])
+        ])
+      ])
     ])
-  })
-}
-var staticRenderFns = []
+  }
+]
 render._withStripped = true
 
 
@@ -71676,7 +71666,9 @@ var render = function() {
         "b-navbar",
         { attrs: { toggleable: "lg", type: "dark", variant: "info" } },
         [
-          _c("b-navbar-brand", { attrs: { href: "#" } }, [_vm._v("NavBar")]),
+          _c("b-navbar-brand", { attrs: { href: "#" } }, [
+            _vm._v("NasssszzzvBar")
+          ]),
           _vm._v(" "),
           _c("b-navbar-toggle", { attrs: { target: "nav-collapse" } }),
           _vm._v(" "),
