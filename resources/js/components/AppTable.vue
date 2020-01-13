@@ -48,13 +48,21 @@
                 >
 
                 <template v-slot:cell(actions)="row">
-                    <b-button size="sm" @click="row.toggleDetails"> Details</b-button>
+                    <b-button size="sm" @click="row.toggleDetails"> Detalhes</b-button>
+                    <b-button size="sm" :href="actions + '/' + row.item.id + '/edit'"> Editar</b-button>
+
+                    <form :action="actions + '/' + row.item.id" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" :value="csrf">
+                        <b-button size="sm" type="submit"> Excluir</b-button>
+                    </form>
                 </template>
 
                 <template v-slot:row-details="row">
                     <b-card>
                         <ul>
-                            <li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>
+                            <p>Detalhes</p>
+                            <li>Nome: {{ row.item.name }}</li>
                         </ul>
                     </b-card>
                 </template>
@@ -106,6 +114,12 @@
             hasPermission: {
                 type: Boolean,
                 required: true
+            },
+            actions: {
+                type: String
+            },
+            csrf: {
+                type:String
             }
         },
         data() {

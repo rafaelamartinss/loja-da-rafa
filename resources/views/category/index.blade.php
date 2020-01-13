@@ -13,7 +13,12 @@
     </div>
 @endif
 
-<app-table :items="{{$categories}}" v-bind:has-permission="true"></app-table>
+<app-table
+    :items="{{$categories}}"
+    v-bind:has-permission="true"
+    actions="categories"
+    csrf="{{ csrf_token() }}"
+    ></app-table>
 {{--
 <table class="table table-striped table-bordered">
     <thead>
