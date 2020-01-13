@@ -4,13 +4,8 @@
             <!-- User Interface controls -->
             <b-row>
 
-                <b-col lg="4" class="my-1 float-left">
+                <b-col lg="4" class="my-1">
                     <b-form-group
-                        label="Filter"
-                        label-cols-sm="3"
-                        label-align-sm="right"
-                        label-size="sm"
-                        label-for="filterInput"
                         class="mb-0"
                         >
                         <b-input-group size="sm">
@@ -18,7 +13,7 @@
                                 v-model="filter"
                                 type="search"
                                 id="filterInput"
-                                placeholder="Type to Search"
+                                placeholder="Pesquise"
                             ></b-form-input>
                             <b-input-group-append>
                                 <b-button
@@ -27,6 +22,25 @@
                                     >x</b-button>
                             </b-input-group-append>
                         </b-input-group>
+                    </b-form-group>
+                </b-col>
+                <b-col sm="5" md="4" class="my-1">
+                    <b-form-group
+                        label="Items por pagina"
+                        label-cols-sm="7"
+                        label-cols-md="7"
+                        label-cols-lg="6"
+                        label-align-sm="right"
+                        label-size="sm"
+                        label-for="perPageSelect"
+                        class="mb-0"
+                        >
+                        <b-form-select
+                            v-model="perPage"
+                            id="perPageSelect"
+                            size="sm"
+                            :options="pageOptions"
+                        ></b-form-select>
                     </b-form-group>
                 </b-col>
             </b-row>
@@ -48,14 +62,22 @@
                 >
 
                 <template v-slot:cell(actions)="row">
-                    <b-button size="sm" @click="row.toggleDetails"> Detalhes</b-button>
-                    <b-button size="sm" :href="actions + '/' + row.item.id + '/edit'"> Editar</b-button>
+                    <b-button size="sm" @click="row.toggleDetails">
+                        <b-icon icon="plus"></b-icon>
+                    </b-button>
+                    <b-button variant="info" size="sm" :href="actions + '/' + row.item.id + '/edit'">
+                        <b-icon icon="pencil"></b-icon>
+                    </b-button>
 
-                    <form :action="actions + '/' + row.item.id" method="post">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="_token" :value="csrf">
-                        <b-button size="sm" type="submit"> Excluir</b-button>
-                    </form>
+                    <b-button variant="danger" size="sm" type="submit">
+                        <form :action="actions + '/' + row.item.id" method="post">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" :value="csrf">
+                            <b-button variant="danger" size="sm" type="submit">
+                                <b-icon icon="trash-fill"></b-icon>
+                            </b-button>
+                        </form>
+                    </b-button>
                 </template>
 
                 <template v-slot:row-details="row">
@@ -69,25 +91,6 @@
             </b-table>
 
             <b-row>
-                <b-col sm="5" md="3" class="my-1">
-                    <b-form-group
-                        label="Items por pagina"
-                        label-cols-sm="7"
-                        label-cols-md="6"
-                        label-cols-lg="2"
-                        label-align-sm="right"
-                        label-size="sm"
-                        label-for="perPageSelect"
-                        class="mb-0"
-                        >
-                        <b-form-select
-                            v-model="perPage"
-                            id="perPageSelect"
-                            size="sm"
-                            :options="pageOptions"
-                        ></b-form-select>
-                    </b-form-group>
-                </b-col>
                 <b-col sm="5" md="4" class="my-1">
                     <b-pagination
                     v-model="currentPage"
@@ -129,20 +132,15 @@
                     { key: 'name', label: 'Nome', sortable: true, sortDirection: 'desc' },
                     { key: 'actions', label: 'Actions' }
                 ],
-                    totalRows: 1,
-                    currentPage: 1,
-                    perPage: 5,
-                    pageOptions: [5, 10, 15],
-                    sortBy: '',
-                    sortDesc: false,
-                    sortDirection: 'asc',
-                    filter: null,
-                    filterOn: [],
-                    infoModal: {
-                    id: 'info-modal',
-                    title: '',
-                    content: ''
-                }
+                totalRows: 1,
+                currentPage: 1,
+                perPage: 5,
+                pageOptions: [5, 10, 15],
+                sortBy: '',
+                sortDesc: false,
+                sortDirection: 'asc',
+                filter: null,
+                filterOn: [],
             }
             },
         computed: {
@@ -160,15 +158,6 @@
             this.totalRows = this.items.length
         },
         methods: {
-            info(item, index, button) {
-                this.infoModal.title = `Row index: ${index}`
-                this.infoModal.content = JSON.stringify(item, null, 2)
-                this.$root.$emit('bv::show::modal', this.infoModal.id, button)
-            },
-            resetInfoModal() {
-                this.infoModal.title = ''
-                this.infoModal.content = ''
-            },
             onFiltered(filteredItems) {
                 // Trigger pagination to update the number of buttons/pages due to filtering
                 this.totalRows = filteredItems.length
