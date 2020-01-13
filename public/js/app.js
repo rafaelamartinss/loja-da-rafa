@@ -1994,22 +1994,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  }
+  props: ['username', 'logout', 'csrf', 'routeCategory', 'routeProduct'],
+  methods: {}
 });
 
 /***/ }),
@@ -71624,7 +71611,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "col-md-8" }, [
           _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header" }, [
-              _vm._v("Exasssmplaaaeee Component")
+              _vm._v("Example Component")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
@@ -71667,7 +71654,7 @@ var render = function() {
         { attrs: { toggleable: "lg", type: "dark", variant: "info" } },
         [
           _c("b-navbar-brand", { attrs: { href: "#" } }, [
-            _vm._v("NasssszzzvBar")
+            _vm._v("Loja da Rafa")
           ]),
           _vm._v(" "),
           _c("b-navbar-toggle", { attrs: { target: "nav-collapse" } }),
@@ -71678,86 +71665,45 @@ var render = function() {
             [
               _c(
                 "b-navbar-nav",
-                [
-                  _c("b-nav-item", { attrs: { href: "#" } }, [_vm._v("Link")]),
-                  _vm._v(" "),
-                  _c("b-nav-item", { attrs: { href: "#", disabled: "" } }, [
-                    _vm._v("Disabled")
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "b-navbar-nav",
                 { staticClass: "ml-auto" },
                 [
                   _c(
-                    "b-nav-form",
+                    "b-nav-item-dropdown",
+                    { attrs: { text: "Cadastros", right: "" } },
                     [
-                      _c("b-form-input", {
-                        staticClass: "mr-sm-2",
-                        attrs: { size: "sm", placeholder: "Search" }
-                      }),
+                      _c(
+                        "b-dropdown-item",
+                        { attrs: { href: _vm.routeCategory } },
+                        [_vm._v("Categorias")]
+                      ),
                       _vm._v(" "),
                       _c(
-                        "b-button",
-                        {
-                          staticClass: "my-2 my-sm-0",
-                          attrs: { size: "sm", type: "submit" }
-                        },
-                        [_vm._v("Search")]
+                        "b-dropdown-item",
+                        { attrs: { href: _vm.routeProduct } },
+                        [_vm._v("Produtos")]
                       )
                     ],
                     1
                   ),
                   _vm._v(" "),
                   _c(
-                    "b-nav-item-dropdown",
-                    { attrs: { text: "Lang", right: "" } },
+                    "form",
+                    { attrs: { action: "http:" + _vm.logout, method: "post" } },
                     [
-                      _c("b-dropdown-item", { attrs: { href: "#" } }, [
-                        _vm._v("EN")
-                      ]),
+                      _c("input", {
+                        attrs: { type: "hidden", name: "_token" },
+                        domProps: { value: _vm.csrf }
+                      }),
                       _vm._v(" "),
-                      _c("b-dropdown-item", { attrs: { href: "#" } }, [
-                        _vm._v("ES")
-                      ]),
-                      _vm._v(" "),
-                      _c("b-dropdown-item", { attrs: { href: "#" } }, [
-                        _vm._v("RU")
-                      ]),
-                      _vm._v(" "),
-                      _c("b-dropdown-item", { attrs: { href: "#" } }, [
-                        _vm._v("FA")
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-nav-item-dropdown",
-                    {
-                      attrs: { right: "" },
-                      scopedSlots: _vm._u([
+                      _c(
+                        "b-button",
                         {
-                          key: "button-content",
-                          fn: function() {
-                            return [_c("em", [_vm._v("User")])]
-                          },
-                          proxy: true
-                        }
-                      ])
-                    },
-                    [
-                      _vm._v(" "),
-                      _c("b-dropdown-item", { attrs: { href: "#" } }, [
-                        _vm._v("Profile")
-                      ]),
-                      _vm._v(" "),
-                      _c("b-dropdown-item", { attrs: { href: "#" } }, [
-                        _vm._v("Sign Out")
-                      ])
+                          staticClass: "mb-2",
+                          attrs: { variant: "primary", type: "submit" }
+                        },
+                        [_c("b-icon", { attrs: { icon: "box-arrow-right" } })],
+                        1
+                      )
                     ],
                     1
                   )
@@ -83969,7 +83915,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
+Vue.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__["BootstrapVue"]);
+Vue.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__["BootstrapVueIcons"]);
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('the-sidebar', __webpack_require__(/*! ./components/layout/TheSidebar.vue */ "./resources/js/components/layout/TheSidebar.vue")["default"]);
 /**
