@@ -24,6 +24,7 @@ Vue.use(BootstrapVueIcons)
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('the-sidebar', require('./components/layout/TheSidebar.vue').default);
+Vue.component('app-table', require('./components/AppTable.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
