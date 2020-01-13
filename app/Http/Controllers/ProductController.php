@@ -49,11 +49,12 @@ class ProductController extends Controller
 
         $product = Product::create($request->all());
 
-        /**
-         * @var User
-         */
-        $user = Auth::user();
-        $user->notify(new NewProduct($product));
+        //Problema com WebHook
+        // /**
+        //  * @var User
+        //  */
+        // $user = Auth::user();
+        // $user->notify(new NewProduct($product));
 
         return redirect('/products');
     }
