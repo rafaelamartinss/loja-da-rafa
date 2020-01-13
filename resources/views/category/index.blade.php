@@ -14,11 +14,11 @@
         </div>
     @endif
 
-    <app-table
+    <base-table
         :items="{{$categories}}"
         v-bind:has-permission="true"
         actions="categories"
         csrf="{{ csrf_token() }}"
-        ></app-table>
+    ></base-table>
 </div>
 @endsection
