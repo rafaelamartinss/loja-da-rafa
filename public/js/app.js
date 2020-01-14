@@ -7627,6 +7627,16 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/src/index.js");
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_0__);
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n    mutation deleteProduct($id: ID!)\n    {\n        deleteProduct(id: $id){\n            id\n            name\n        }\n    }"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject() {
   var data = _taggedTemplateLiteral(["\n    query Products\n    {\n        products{\n            id\n            name\n        }\n    }"]);
 
@@ -7650,8 +7660,100 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var QUERY_PRODUCTS = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject());
+var QUERY_DELETE_PRODUCT = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject2());
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     hasPermission: {
@@ -7663,9 +7765,71 @@ var QUERY_PRODUCTS = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templat
     }
   },
   apollo: {
-    // Simple query that will update the 'hello' vue property
     products: {
       query: QUERY_PRODUCTS
+    }
+  },
+  data: function data() {
+    return {
+      products: [],
+      fields: [{
+        key: 'id',
+        label: 'ID',
+        sortable: true,
+        "class": 'text-center'
+      }, {
+        key: 'name',
+        label: 'Nome',
+        sortable: true,
+        sortDirection: 'desc'
+      }, {
+        key: 'actions',
+        label: 'Actions'
+      }],
+      totalRows: 1,
+      currentPage: 1,
+      perPage: 5,
+      pageOptions: [5, 10, 15],
+      sortBy: '',
+      sortDesc: false,
+      sortDirection: 'asc',
+      filter: null,
+      filterOn: []
+    };
+  },
+  computed: {
+    sortOptions: function sortOptions() {
+      // Create an options list from our fields
+      return this.fields.filter(function (f) {
+        return f.sortable;
+      }).map(function (f) {
+        return {
+          text: f.label,
+          value: f.key
+        };
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$apollo.queries.products.refetch().then(function () {
+      _this.totalRows = _this.products.length;
+    });
+  },
+  methods: {
+    onFiltered: function onFiltered(filteredItems) {
+      // Trigger pagination to update the number of buttons/pages due to filtering
+      this.totalRows = filteredItems.length;
+      this.currentPage = 1;
+    },
+    deleteProduct: function deleteProduct(id) {
+      this.$apollo.mutate({
+        mutation: QUERY_DELETE_PRODUCT,
+        variables: {
+          id: id
+        }
+      });
     }
   }
 });
@@ -84908,23 +85072,240 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.products !== undefined
-    ? _c(
-        "div",
-        { staticClass: "container" },
+  return _c(
+    "div",
+    [
+      _c(
+        "b-container",
+        { attrs: { fluid: "" } },
         [
-          _c("base-table", {
+          _c(
+            "b-row",
+            [
+              _c(
+                "b-col",
+                { staticClass: "my-1", attrs: { lg: "4" } },
+                [
+                  _c(
+                    "b-form-group",
+                    { staticClass: "mb-0" },
+                    [
+                      _c(
+                        "b-input-group",
+                        { attrs: { size: "sm" } },
+                        [
+                          _c("b-form-input", {
+                            attrs: {
+                              type: "search",
+                              id: "filterInput",
+                              placeholder: "Pesquise"
+                            },
+                            model: {
+                              value: _vm.filter,
+                              callback: function($$v) {
+                                _vm.filter = $$v
+                              },
+                              expression: "filter"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "b-input-group-append",
+                            [
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { disabled: !_vm.filter },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.filter = ""
+                                    }
+                                  }
+                                },
+                                [_vm._v("x")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "b-col",
+                { staticClass: "my-1", attrs: { sm: "5", md: "4" } },
+                [
+                  _c(
+                    "b-form-group",
+                    {
+                      staticClass: "mb-0",
+                      attrs: {
+                        label: "Items por pagina",
+                        "label-cols-sm": "7",
+                        "label-cols-md": "7",
+                        "label-cols-lg": "6",
+                        "label-align-sm": "right",
+                        "label-size": "sm",
+                        "label-for": "perPageSelect"
+                      }
+                    },
+                    [
+                      _c("b-form-select", {
+                        attrs: {
+                          id: "perPageSelect",
+                          size: "sm",
+                          options: _vm.pageOptions
+                        },
+                        model: {
+                          value: _vm.perPage,
+                          callback: function($$v) {
+                            _vm.perPage = $$v
+                          },
+                          expression: "perPage"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("b-table", {
             attrs: {
+              "show-empty": "",
+              small: "",
+              stacked: "md",
               items: _vm.products,
-              "has-permission": true,
-              actions: "products",
-              csrf: _vm.csrf
-            }
-          })
+              fields: _vm.fields,
+              "current-page": _vm.currentPage,
+              "per-page": _vm.perPage,
+              filter: _vm.filter,
+              filterIncludedFields: _vm.filterOn,
+              "sort-by": _vm.sortBy,
+              "sort-desc": _vm.sortDesc,
+              "sort-direction": _vm.sortDirection
+            },
+            on: {
+              "update:sortBy": function($event) {
+                _vm.sortBy = $event
+              },
+              "update:sort-by": function($event) {
+                _vm.sortBy = $event
+              },
+              "update:sortDesc": function($event) {
+                _vm.sortDesc = $event
+              },
+              "update:sort-desc": function($event) {
+                _vm.sortDesc = $event
+              },
+              filtered: _vm.onFiltered
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "cell(actions)",
+                fn: function(row) {
+                  return [
+                    _c(
+                      "b-button",
+                      {
+                        attrs: { size: "sm" },
+                        on: { click: row.toggleDetails }
+                      },
+                      [_c("b-icon", { attrs: { icon: "plus" } })],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-button",
+                      {
+                        attrs: {
+                          variant: "info",
+                          size: "sm",
+                          href: "products/" + row.item.id + "/edit"
+                        }
+                      },
+                      [_c("b-icon", { attrs: { icon: "pencil" } })],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-button",
+                      {
+                        attrs: { variant: "danger", size: "sm" },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteProduct(row.item.id)
+                          }
+                        }
+                      },
+                      [_c("b-icon", { attrs: { icon: "trash-fill" } })],
+                      1
+                    )
+                  ]
+                }
+              },
+              {
+                key: "row-details",
+                fn: function(row) {
+                  return [
+                    _c("b-card", [
+                      _c("ul", [
+                        _c("p", [_vm._v("Detalhes")]),
+                        _vm._v(" "),
+                        _c("li", [_vm._v("Nome: " + _vm._s(row.item.name))])
+                      ])
+                    ])
+                  ]
+                }
+              }
+            ])
+          }),
+          _vm._v(" "),
+          _c(
+            "b-row",
+            [
+              _c(
+                "b-col",
+                { staticClass: "my-1", attrs: { sm: "5", md: "4" } },
+                [
+                  _c("b-pagination", {
+                    staticClass: "my-0",
+                    attrs: {
+                      "total-rows": _vm.totalRows,
+                      "per-page": _vm.perPage,
+                      align: "fill",
+                      size: "sm"
+                    },
+                    model: {
+                      value: _vm.currentPage,
+                      callback: function($$v) {
+                        _vm.currentPage = $$v
+                      },
+                      expression: "currentPage"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
         ],
         1
       )
-    : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
