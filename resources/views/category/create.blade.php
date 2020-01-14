@@ -6,7 +6,7 @@
             <h1 class="display-3">Nova categoria</h1>
             <div>
                 <base-form
-                    :fields="[{name: 'name', type:'text', label:'Nome', value:''}]"
+                    :fields="[{name: 'name', type_input:'text', label:'Nome', value:''}]"
                     actions="categories"
                     csrf="{{ csrf_token() }}"
                     route-form="{{route('categories.store')}}"

@@ -6,7 +6,7 @@
             <h3>Editar categoria</h3>
             <div>
                 <base-form
-                    v-bind:fields="[
+                    :fields="[
                         {name: '_method', type_input:'hidden', label:'method', value:'PUT'},
                         {name: 'name', type_input:'text', label:'Nome', value:'{{$category->name}}'},
                     ]"

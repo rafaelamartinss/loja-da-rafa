@@ -16,14 +16,14 @@
         >
             <b-form-group
                 v-if="field.options === undefined"
-                v-show="field.type !== 'hidden'"
+                v-show="field.type_input !== 'hidden'"
                 :id="field.name"
                 :label="field.label"
                 :label-for="field.name"
             >
                 <b-form-input
                 :id="field.name"
-                :type="field.type"
+                :type="field.type_input"
                 :name="field.name"
                 :value="field.value !== undefined ? field.value : ''"
                 required
@@ -43,7 +43,8 @@
                     text-field="name"
                     size="sm"
                     class="mt-3"
-                ></b-form-select>
+                >
+            </b-form-select>
             </b-form-group>
         </div>
 
