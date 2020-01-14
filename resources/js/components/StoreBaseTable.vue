@@ -1,6 +1,6 @@
 <template>
-        <div>
-            <b-container fluid>
+    <div>
+        <b-container fluid>
             <!-- User Interface controls -->
             <b-row>
 
@@ -142,7 +142,7 @@
                 filter: null,
                 filterOn: [],
             }
-            },
+        },
         computed: {
             sortOptions() {
                 // Create an options list from our fields
