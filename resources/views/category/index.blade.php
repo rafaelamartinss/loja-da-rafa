@@ -14,11 +14,9 @@
         </div>
     @endif
 
-    <base-table
-        :items="{{$categories}}"
-        v-bind:has-permission="true"
-        actions="categories"
+    <category-table
+        :has-permission="true"
         csrf="{{ csrf_token() }}"
-    ></base-table>
+    ></category-table>
 </div>
 @endsection
