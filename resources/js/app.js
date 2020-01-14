@@ -1,38 +1,42 @@
-import {BootstrapVue, BootstrapVueIcons} from 'bootstrap-vue' //Importing
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+import {BootstrapVue, BootstrapVueIcons} from 'bootstrap-vue'
+import VueApollo from 'vue-apollo'
+import { ApolloClient } from 'apollo-client'
+import { createHttpLink } from 'apollo-link-http'
+import { InMemoryCache } from 'apollo-cache-inmemory'
 
 require('./bootstrap');
 
 window.Vue = require('vue');
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
+Vue.use(VueApollo)
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('the-sidebar', require('./components/layout/TheSidebar.vue').default);
 Vue.component('base-table', require('./components/StoreBaseTable.vue').default);
 Vue.component('base-form', require('./components/StoreBaseForm.vue').default);
+Vue.component('category-table', require('./components/category/Table.vue').default);
+Vue.component('product-table', require('./components/product/Table.vue').default);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+
+const httpLink = createHttpLink({
+    // You should use an absolute URL here
+    uri: 'http://localhost:3000/graphql',
+});
+
+const cache = new InMemoryCache();
+
+const apolloClient = new ApolloClient({
+link: httpLink,
+cache,
+});
+
+const apolloProvider = new VueApollo({
+    defaultClient: apolloClient,
+});
 
 const app = new Vue({
     el: '#app',
+    apolloProvider,
 });
