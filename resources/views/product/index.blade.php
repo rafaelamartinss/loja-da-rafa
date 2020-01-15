@@ -15,9 +15,9 @@
     @endif
 
 
-    <product-table
+    <store-product-table
         :has-permission="true"
         csrf="{{ csrf_token() }}"
-    ></product-table>
+    ></store-product-table>
 </div>
 @endsection

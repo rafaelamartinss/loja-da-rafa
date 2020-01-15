@@ -9,7 +9,7 @@ type Query {
     user(id: ID @eq): User @find
     categories: [Category!]! @all
     category(id: ID @eq): Category @find
-    products: [Product!]! @all
+    products: [Product!]! @all @cache(maxAge: 50)
     product(id: ID @eq): Product @find
 }
 

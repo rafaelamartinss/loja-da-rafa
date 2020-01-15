@@ -29,7 +29,7 @@
                     route-form="{{ route('products.store') }}"
                 ></base-form> --}}
 
-                <product-form
+                <store-product-form
                     :fields="[
                         {name: 'name', type_input:'text', label:'Nome'},
                         {name: 'value', type_input:'number', label:'Valor'},
@@ -38,7 +38,7 @@
                     ]"
                     csrf="{{ csrf_token() }}"
                     route-list="{{route('products.index')}}"
-                ></product-form>
+                ></store-product-form>
             </div>
         </div>
     </div>

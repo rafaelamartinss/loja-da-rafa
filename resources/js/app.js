@@ -24,8 +24,8 @@ Vue.component('the-sidebar', require('./components/layout/TheSidebar.vue').defau
 Vue.component('base-table', require('./components/StoreBaseTable.vue').default);
 Vue.component('base-form', require('./components/StoreBaseForm.vue').default);
 Vue.component('category-table', require('./components/category/Table.vue').default);
-Vue.component('product-table', require('./components/product/Table.vue').default);
-Vue.component('product-form', require('./components/product/Form.vue').default);
+Vue.component('store-product-table', require('./components/product/StoreProductTable.vue').default);
+Vue.component('store-product-form', require('./components/product/StoreProductForm.vue').default);
 
 
 const httpLink = createHttpLink({
