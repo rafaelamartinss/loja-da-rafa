@@ -49,7 +49,7 @@
                 show-empty
                 small
                 stacked="md"
-                :items="products"
+                :items="categories"
                 :fields="fields"
                 :current-page="currentPage"
                 :per-page="perPage"
@@ -65,10 +65,10 @@
                     <b-button size="sm" @click="row.toggleDetails">
                         <b-icon icon="plus"></b-icon>
                     </b-button>
-                    <b-button variant="info" size="sm" :href="'products/' + row.item.id + '/edit'">
+                    <b-button variant="info" size="sm" :href="'categories/' + row.item.id + '/edit'">
                         <b-icon icon="pencil"></b-icon>
                     </b-button>
-                    <b-button variant="danger" size="sm" @click="deleteProduct(row.item.id)">
+                    <b-button variant="danger" size="sm" @click="deleteCategory(row.item.id)">
                         <b-icon icon="trash-fill"></b-icon>
                     </b-button>
                 </template>
@@ -103,19 +103,19 @@
 <script>
 import gql from 'graphql-tag'
 
-const QUERY_PRODUCTS = gql`
-    query Products
+const QUERY_CATEGORIES = gql`
+    query Categories
     {
-        products{
+        categories{
             id
             name
         }
     }`;
 
-const QUERY_DELETE_PRODUCT = gql`
-    mutation deleteProduct($id: ID!)
+const QUERY_DELETE_CATEGORY = gql`
+    mutation deleteCategory($id: ID!)
     {
-        deleteProduct(id: $id){
+        deleteCategory(id: $id){
             id
             name
         }
@@ -132,13 +132,13 @@ const QUERY_DELETE_PRODUCT = gql`
             }
         },
         apollo: {
-            products: {
-                query : QUERY_PRODUCTS
+            categories: {
+                query : QUERY_CATEGORIES
             },
         },
         data() {
             return {
-                products: [],
+                categories: [],
                 fields: [
                     { key: 'id', label: 'ID', sortable: true, class: 'text-center' },
                     { key: 'name', label: 'Nome', sortable: true, sortDirection: 'desc' },
@@ -166,8 +166,8 @@ const QUERY_DELETE_PRODUCT = gql`
             }
         },
         mounted() {
-            this.$apollo.queries.products.refetch().then(() => {
-                this.totalRows = this.products.length
+            this.$apollo.queries.categories.refetch().then(() => {
+                this.totalRows = this.categories.length
             });
         },
         methods: {
@@ -176,15 +176,15 @@ const QUERY_DELETE_PRODUCT = gql`
                 this.totalRows = filteredItems.length
                 this.currentPage = 1
             },
-            deleteProduct(id) {
+            deleteCategory(id) {
                 this.$apollo.mutate({
-                    mutation: QUERY_DELETE_PRODUCT,
+                    mutation: QUERY_DELETE_CATEGORY,
                     variables: {
                         id
                     }
                 })
 
-                this.$apollo.queries.products.refetch()
+                this.$apollo.queries.categories.refetch()
             }
         }
     }

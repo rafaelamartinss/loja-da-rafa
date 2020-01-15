@@ -101467,7 +101467,7 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 Vue.component('the-sidebar', __webpack_require__(/*! ./components/layout/TheSidebar.vue */ "./resources/js/components/layout/TheSidebar.vue")["default"]);
 Vue.component('base-table', __webpack_require__(/*! ./components/StoreBaseTable.vue */ "./resources/js/components/StoreBaseTable.vue")["default"]);
 Vue.component('base-form', __webpack_require__(/*! ./components/StoreBaseForm.vue */ "./resources/js/components/StoreBaseForm.vue")["default"]);
-Vue.component('category-table', __webpack_require__(/*! ./components/category/Table.vue */ "./resources/js/components/category/Table.vue")["default"]);
+Vue.component('store-category-table', __webpack_require__(/*! ./components/category/Table.vue */ "./resources/js/components/category/Table.vue")["default"]);
 Vue.component('store-product-table', __webpack_require__(/*! ./components/product/Table.vue */ "./resources/js/components/product/Table.vue")["default"]);
 Vue.component('store-product-form', __webpack_require__(/*! ./components/product/Form.vue */ "./resources/js/components/product/Form.vue")["default"]);
 var httpLink = Object(apollo_link_http__WEBPACK_IMPORTED_MODULE_5__["createHttpLink"])({

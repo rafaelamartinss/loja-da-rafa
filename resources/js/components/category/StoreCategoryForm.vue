@@ -10,7 +10,6 @@
                     required
                 ></b-form-input>
 
-
                 <div
                     v-for="(field, key) in fields"
                     v-bind:key="key"
@@ -24,10 +23,8 @@
                     >
                         <b-form-input
                         :id="field.name"
-                        :type="field.type_input"
                         :name="field.name"
                         v-model="form[field.name]"
-                        :value="field.value !== undefined ? field.value : ''"
                         required
                         ></b-form-input>
                     </b-form-group>
@@ -50,8 +47,7 @@
                     </b-form-select>
                     </b-form-group>
                 </div>
-
-                <b-button @click="createProduct()" variant="primary">Salvar</b-button>
+                <b-button @click="submitCategory()" variant="primary">Salvar</b-button>
                 <b-button type="reset" variant="danger" :href="routeList">Cancelar</b-button>
             </b-form>
         </b-container>
@@ -62,18 +58,26 @@
 <script>
 import gql from 'graphql-tag'
 
-const QUERY_CREATE_PRODUCT = gql`
-    mutation createProduct(
-        $name: String!,
-        $value: Float!,
-        $quantity: Int!,
-        $category_id: ID!)
+const QUERY_CREATE_CATEGORY = gql`
+    mutation createCategory(
+        $name: String!,)
     {
-        createProduct(
+        createCategory(
             name: $name,
-            value: $value,
-            quantity: $quantity,
-            category_id: $category_id
+        ){
+            id
+            name
+        }
+    }`;
+
+const QUERY_UPDATE_CATEGORY = gql`
+    mutation updateCategory(
+        $id: ID!,
+        $name: String,)
+    {
+        updateCategory(
+            id: $id,
+            name: $name,
         ){
             id
             name
@@ -90,33 +94,50 @@ const QUERY_CREATE_PRODUCT = gql`
             },
             csrf: {
                 type: String
+            },
+            category_id: {
+                type: String
             }
         },
-        apollo: {
-            // products: {
-            //     query : QUERY_PRODUCTS
-            // },
-        },
+        apollo: {},
         data() {
             return {
-                products: [],
-                form: {}
+                categories: [],
+                form: {
+                    _method: this.filterFields('_method'),
+                    name: this.filterFields('name'),
+                }
             }
         },
         methods: {
-            createProduct() {
+            filterFields(inputName) {
+                let inputValue = this.fields.filter(field => {
+                    return field.name === inputName
+                })[0]
+                return inputValue !== undefined ? inputValue.value : 'POST';
+            },
+            submitCategory() {
+                this.form._method === 'PUT' ? this.updateCategory() : this.createCategory()
+            },
+            createCategory() {
                 let name = this.form.name;
-                let value = this.form.value;
-                let quantity = this.form.quantity;
-                let category_id = this.form.category_id;
 
                 this.$apollo.mutate({
-                    mutation: QUERY_CREATE_PRODUCT,
+                    mutation: QUERY_CREATE_CATEGORY,
                     variables: {
-                        name,
-                        value,
-                        quantity,
-                        category_id
+                        name
+                    }
+                }).then(() => {
+                    window.location.href = this.routeList
+                })
+            },
+            updateCategory() {
+                let name = this.form.name;
+
+                this.$apollo.mutate({
+                    mutation: QUERY_UPDATE_CATEGORY,
+                    variables: {
+                        id: this.category_id,
                     }
                 }).then(() => {
                     window.location.href = this.routeList

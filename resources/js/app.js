@@ -23,7 +23,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('the-sidebar', require('./components/layout/TheSidebar.vue').default);
 Vue.component('base-table', require('./components/StoreBaseTable.vue').default);
 Vue.component('base-form', require('./components/StoreBaseForm.vue').default);
-Vue.component('category-table', require('./components/category/Table.vue').default);
+Vue.component('store-category-table', require('./components/category/StoreCategoryTable.vue').default);
+Vue.component('store-category-form', require('./components/category/StoreCategoryForm.vue').default);
 Vue.component('store-product-table', require('./components/product/StoreProductTable.vue').default);
 Vue.component('store-product-form', require('./components/product/StoreProductForm.vue').default);
 

@@ -14,9 +14,9 @@
         </div>
     @endif
 
-    <category-table
+    <store-category-table
         :has-permission="true"
         csrf="{{ csrf_token() }}"
-    ></category-table>
+    ></store-category-table>
 </div>
 @endsection

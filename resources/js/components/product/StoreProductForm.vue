@@ -47,7 +47,6 @@
                     </b-form-select>
                     </b-form-group>
                 </div>
-                {{form}}
                 <b-button @click="submitProduct()" variant="primary">Salvar</b-button>
                 <b-button type="reset" variant="danger" :href="routeList">Cancelar</b-button>
             </b-form>
