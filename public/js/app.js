@@ -7562,7 +7562,6 @@ var QUERY_CATEGORIES = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templ
     }
   },
   apollo: {
-    // Simple query that will update the 'hello' vue property
     categories: {
       query: QUERY_CATEGORIES
     }
@@ -7784,7 +7783,7 @@ var QUERY_DELETE_PRODUCT = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_t
         sortDirection: 'desc'
       }, {
         key: 'actions',
-        label: 'Actions'
+        label: 'Ações'
       }],
       totalRows: 1,
       currentPage: 1,
@@ -7830,6 +7829,7 @@ var QUERY_DELETE_PRODUCT = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_t
           id: id
         }
       });
+      this.$apollo.queries.products.refetch();
     }
   }
 });

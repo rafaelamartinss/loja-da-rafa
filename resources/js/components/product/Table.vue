@@ -142,7 +142,7 @@ const QUERY_DELETE_PRODUCT = gql`
                 fields: [
                     { key: 'id', label: 'ID', sortable: true, class: 'text-center' },
                     { key: 'name', label: 'Nome', sortable: true, sortDirection: 'desc' },
-                    { key: 'actions', label: 'Actions' }
+                    { key: 'actions', label: 'Ações' }
                 ],
                 totalRows: 1,
                 currentPage: 1,
@@ -183,6 +183,8 @@ const QUERY_DELETE_PRODUCT = gql`
                         id
                     }
                 })
+
+                this.$apollo.queries.products.refetch()
             }
         }
     }
