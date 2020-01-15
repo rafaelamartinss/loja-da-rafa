@@ -16,7 +16,7 @@
             @endif
 
             <div>
-                <base-form
+                {{-- <base-form
                     :fields="[
                         {name: 'name', type_input:'text', label:'Nome'},
                         {name: 'value', type_input:'number', label:'Valor'},
@@ -27,7 +27,18 @@
                     csrf="{{ csrf_token() }}"
                     route-list="{{route('products.index')}}"
                     route-form="{{ route('products.store') }}"
-                ></base-form>
+                ></base-form> --}}
+
+                <product-form
+                    :fields="[
+                        {name: 'name', type_input:'text', label:'Nome'},
+                        {name: 'value', type_input:'number', label:'Valor'},
+                        {name: 'quantity', type_input:'text', label:'Quantidade'},
+                        {name: 'category_id', type_input:'text', label:'Categoria', options: {{$categories}}},
+                    ]"
+                    csrf="{{ csrf_token() }}"
+                    route-list="{{route('products.index')}}"
+                ></product-form>
             </div>
         </div>
     </div>
